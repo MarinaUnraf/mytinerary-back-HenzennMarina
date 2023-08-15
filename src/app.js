@@ -1,6 +1,10 @@
 const express = require("express") /*  require calls express module and saves it in a const methond  using commonjs-  esm module uses import */
  
-const router = require("./router/router.js") /* imports the router module to be used by app */
+const router = require("./routers/router.js") /* imports the router module to be used by app */
+
+require("./config/db.js") /*  tries to connect to the database*/
+
+
 
 const app = express() /* executes express method in a const called app. Later app can call the inherit methods from express */
 
