@@ -3,6 +3,7 @@ const cors = require("cors")
  
 const router = require("./routers/router.js") /* imports the router module to be used by app */
 
+require('dotenv').config() 
 require("./config/db.js") /*  tries to connect to the database*/
 
 
@@ -16,8 +17,8 @@ app.use(cors()) /* import cors */
 
 app.use("/api",router) /* configures the use of the router in the server, /api is the default root  */
 
+const Port = process.env.PORT
+app.listen(Port, ()=> {             /* method that listens requests of the port and returns a callback function */
 
-app.listen(3000, ()=> {             /* method that listens requests of the port and returns a callback function */
-
-    console.log("listening on 3000");
+    console.log("listening on port "+ Port);
 })

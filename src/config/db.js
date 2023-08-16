@@ -2,7 +2,7 @@
 const mongoose = require('mongoose'); /* imports mongoose for the db conection */
 
 
-const uri = "mongodb+srv://MHenzenn:Aloy2732@cluster-mindhub-backend.uc3wdno.mongodb.net/?retryWrites=true&w=majority"/* addres link to the database on mongo atlas */
+const uri = process.env.URI_DB/* addres link to the database on mongo atlas */
 
 
 
