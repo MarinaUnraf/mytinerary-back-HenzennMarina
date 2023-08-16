@@ -8,7 +8,7 @@ const uri = "mongodb+srv://MHenzenn:Aloy2732@cluster-mindhub-backend.uc3wdno.mon
 
     /*  connect method needs a url address returns a promise bc is an async function. .then returns a response if the promise is fullfill  */
     mongoose.connect(uri)
-            /*  .then and catch need to recibe a callback function to avoid recursive messages */
+            /*  .then and .catch need to recibe a callback function to avoid recursive messages */
             .then( ()=>{
                 console.log("succesfully connected with database")
             })
