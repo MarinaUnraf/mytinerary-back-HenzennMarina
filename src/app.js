@@ -10,7 +10,7 @@ require("./config/db.js") /*  tries to connect to the database*/
 
 const app = express() /* executes express method in a const called app. Later app can call the inherit methods from express */
 
-app.use(express.json())/* permits to work with json responses  */
+app.use(express.json())/* permits to work with json data */
 app.use(cors()) /* import cors */
 
 
