@@ -8,10 +8,10 @@ const router = express.Router()/*  calls the router method from express and save
 /* starts to work with   HTTP requests  in the endpoint router  */
 
 /* handles 2 parameters, the first one is an string(the endpoint), the second one is a function, usually a callback one with the req and res params that are request object and response object. the endpoint can pass params to the controller for use it later */
-/* CRUD routers for cities  */
-router.post("/city", addCity)
+/* CRUD routers   */
 router.get("/cities", getCities)
 router.post("/cities", addCollection)
+router.post("/city", addCity)
 router.get("/city", getCity)
 router.put("/city/:id", updateCity)
 router.delete("/city", deleteCity)
