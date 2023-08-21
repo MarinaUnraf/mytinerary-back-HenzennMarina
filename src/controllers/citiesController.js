@@ -24,8 +24,12 @@ const addCity = async (req, res ) =>{
 /* Get all the cities on the collection controller */
 
 const getCities = async (req, res) =>{
+    const query = {}
+    if(req.query.name){
+        query.name = {$regex: req.query.name, $options:'i'}
+    }
    try {
-       let cities =  await city.find()
+       let cities =  await city.find(query)
     
       res.status(200).json(
        cities
