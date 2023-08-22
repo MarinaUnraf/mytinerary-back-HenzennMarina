@@ -12,7 +12,7 @@ const router = express.Router()/*  calls the router method from express and save
 router.get("/cities", getCities)
 router.post("/cities", addCollection)
 router.post("/city", addCity)
-router.get("/city", getCity)
+router.get("/city/:id", getCity)
 router.put("/city/:id", updateCity)
 router.delete("/city", deleteCity)
 

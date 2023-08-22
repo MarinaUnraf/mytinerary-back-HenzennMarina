@@ -25,8 +25,10 @@ const addCity = async (req, res ) =>{
 
 const getCities = async (req, res) =>{
     const query = {}
+    const valueselect = req.query.name
     if(req.query.name){
-        query.name = {$regex: req.query.name, $options:'i'}
+        
+        query.name = {$regex: valueselect, $options:'i'  }
     }
    try {
        let cities =  await city.find(query)
@@ -45,8 +47,8 @@ const getCities = async (req, res) =>{
 const getCity = async (req, res) =>{
    try {
 
-        let {id}= req.query
-       let cityFound =  await city.findById({_id: id})
+        let {id}= req.params
+       let cityFound =  await city.findById(id)
     
       res.status(200).json(
             {
