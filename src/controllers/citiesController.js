@@ -25,7 +25,7 @@ const addCity = async (req, res ) =>{
 
 const getCities = async (req, res) =>{
     const query = {}
-    const valueselect = req.query.name
+    const valueselect = "^"+req.query.name
     if(req.query.name){
         
         query.name = {$regex: valueselect, $options:'i'  }
