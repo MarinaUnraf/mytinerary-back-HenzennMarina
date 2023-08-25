@@ -17,8 +17,12 @@ router.put("/city/:id", updateCity)
 router.delete("/city", deleteCity)
 
 
-
-
+/* routers for itineraries */
+router.get("/itineraries", getCities)
+router.post("/itinerary", addCity)
+router.get("/itinerary/:id", getCity)
+router.put("/itinerary/:id", updateCity)
+router.delete("/itinerary", deleteCity)
 
 
 

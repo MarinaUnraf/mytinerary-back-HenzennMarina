@@ -2,6 +2,11 @@ const {Schema, model} = require ("mongoose"); /*  imports the schema and model c
 
 /* instances a new schema object with the structure to use fro the data */
 const schemaItinerary= new Schema({
+        
+        name:{
+            type: String,
+            required: true,
+        },
         userName:{
             type: String,
             required: true,
@@ -19,11 +24,11 @@ const schemaItinerary= new Schema({
             required: true,
         },
          likes: {
-            type: String,
+            type: [String],
             required: true,
         },
          hashtags: {
-            type: String,
+            type: [String],
             required: true,
         }
 })
