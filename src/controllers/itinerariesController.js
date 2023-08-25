@@ -4,13 +4,13 @@ const itinerary =require('../models/itinerary.js')
 const addItinerary = async (req, res ) =>{
     try {
         /*  using req body for take data from a json */
-        const ityneraryInfo = req.body
+        const itineraryInfo = req.body
         
-        //console.log(cityInfo)
+        //console.log(itineraryInfo)
 
-        const itineraryAdded = await itinerary.create(ityneraryInfo)
+        const itineraryAdded = await itinerary.create(itineraryInfo)
         
-        res.Status(200).json({
+        res.status(200).json({
             message: "added itinerary to city",
             "itinerary": itineraryAdded
         })
