@@ -10,9 +10,9 @@ const addItinerary = async (req, res ) =>{
 
         const itineraryAdded = await itinerary.create(itineraryInfo)
         
-        res.status(200).json({
-            message: "added itinerary to city",
-            "itinerary": itineraryAdded
+            res.status(200).json({
+                message: "added itinerary to city",
+                "itinerary": itineraryAdded
         })
         
     } 
@@ -28,8 +28,8 @@ const getItineraries = async (req, res) =>{
    try {
        let itineraries =  await itinerary.find()
     
-      res.status(200).json(
-       itineraries
+            res.status(200).json(
+            itineraries
       )
     
    } catch (error) {
@@ -43,7 +43,7 @@ const getItinerary = async (req, res) =>{
    try {
 
         let {id}= req.params
-       let itineraryFound =  await itinerary.findById(id)
+        let itineraryFound =  await itinerary.findById(id)
     
       res.status(200).json(
             {
@@ -69,7 +69,8 @@ const updateItinerary = async (req, res) =>{
             price: req.body.price,
             duration: req.body.duration,
             likes: req.body.likes,
-            hastags: req.body.hastags
+            hastags: req.body.hastags,
+            city: req.body.city
         }
 
         let {id}= req.params /* using params to find the object to update */

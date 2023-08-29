@@ -23,6 +23,10 @@ const schemaItinerary= new Schema({
             type: String,
             required: true,
         },
+         city: {
+            type: [String],
+            required: true,
+        },
          likes: {
             type: [String],
             required: true,
