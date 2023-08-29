@@ -1,4 +1,4 @@
-const {Schema, model} = require ("mongoose"); /*  imports the schema and model component from mongoose */
+const {Schema, model, Types} = require ("mongoose"); /*  imports the schema and model component from mongoose */
 
 /* instances a new schema object with the structure to use fro the data */
 const schemaCity = new Schema({
@@ -14,6 +14,11 @@ const schemaCity = new Schema({
             type: String,
             required: true,
         },
+           itineraries: [{
+            type: Types.ObjectId,
+            Ref: "itinerary"
+            
+        }],
         urlimage:{
             type: String,
             required: true

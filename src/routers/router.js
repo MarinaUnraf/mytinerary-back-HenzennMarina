@@ -2,7 +2,7 @@ const express = require('express') /* imports express into the router module */
 /* importing the controllers for the clients endpoint. In the controller  we can put funtions for different endpoints */
 const {addCity, getCities, getCity, updateCity, deleteCity} = require('../controllers/citiesController.js')
 const { addCollection } = require('../controllers/collectionController.js')
-const { getItinerary, addItinerary, updateItinerary, getItineraries, deleteItinerary } = require('../controllers/itinerariesController.js')
+const { getItinerary, addItinerary, updateItinerary, getItineraries, deleteItinerary,getItinerariesByCity } = require('../controllers/itinerariesController.js')
 const router = express.Router()/*  calls the router method from express and saves it in the router const */
 
 
@@ -20,6 +20,7 @@ router.delete("/city", deleteCity)
 
 /* routers for itineraries */
 router.get("/itineraries", getItineraries)
+router.get("/itineraries/:id", getItinerariesByCity)
 router.post("/itinerary", addItinerary)
 router.get("/itinerary/:id", getItinerary)
 router.put("/itinerary/:id", updateItinerary)
