@@ -14,9 +14,9 @@ const schemaCity = new Schema({
             type: String,
             required: true,
         },
-           itineraries: [{
+          _itineraries: [{
             type: Types.ObjectId,
-            Ref: "itinerary"
+            ref:'itinerary' 
             
         }],
         urlimage:{
@@ -26,7 +26,7 @@ const schemaCity = new Schema({
 })
 /*   create a model based on the schema defined before. needs 2 params: used schema and name*/
 
-const city = model("city", schemaCity)
+const City = model("city", schemaCity)
 
 /* exports the model city */
-module.exports = city
+module.exports = City

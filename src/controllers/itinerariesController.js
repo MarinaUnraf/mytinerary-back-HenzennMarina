@@ -1,14 +1,14 @@
-const city = require('../models/city.js')
-const itinerary =require('../models/itinerary.js')
+const City = require('../models/city.js')
+const Itinerary =require('../models/itinerary.js')
 
 
 const addItinerary = async (req, res ) =>{
     try {
-        let {id} =req.query
-        let cityFound = await city.findById(id)
+        let {id} =req.params
+        let cityFound = await City.findById(id)
 
          let itineraryInfo = req.body
-            let newItinerary = await itinerary.create({...itineraryInfo, city:cityFound})
+            let newItinerary = await Itinerary.create({...itineraryInfo, _city:cityFound})
       /*   let newItinerary = await itinerary.create({
 
             name: "The light city at night",
@@ -21,16 +21,16 @@ const addItinerary = async (req, res ) =>{
             city: cityFound
         }) */
         
-        await cityFound.updateOne({ itineraries:[...cityFound.itineraries, newItinerary]})
+        await cityFound.updateOne({ _itineraries:[...cityFound._itineraries, newItinerary]})
 
-        const cityFoundUpdated = await city.findById(id)
+        const cityFoundUpdated = await City.findById(id).populate("_itineraries")
        
 
         
         
             res.status(200).json({
                 message: "added itinerary to city",
-                "itinerary": cityFoundUpdated
+                itinerary: cityFoundUpdated
         })
         
     } 
@@ -44,10 +44,10 @@ const addItinerary = async (req, res ) =>{
 const getItineraries = async (req, res) =>{
    
    try {
-       let itineraries =  await itinerary.find()
+       let itineraries =  await Itinerary.find().populate('_city')
     
             res.status(200).json(
-            itineraries
+            {itineraries}
       )
     
    } catch (error) {
@@ -61,7 +61,7 @@ const getItinerary = async (req, res) =>{
    try {
 
         let {id}= req.params
-        let itineraryFound =  await itinerary.findById(id)
+        let itineraryFound =  await Itinerary.findById(id)
     
       res.status(200).json(
             {
@@ -81,15 +81,26 @@ const getItinerariesByCity = async (req, res) =>{
    try {
 
         let {id}= req.query
-
-        let itinerariesFound =  await itinerary.find(city._id == id)
-    
-      res.status(200).json(
-            {
-                "message": "itinerary found",
-                "Itinerary": itinerariesFound
+        const cityFound = await City.findById(id)
+        if(cityFound){
+            
+            let itinerariesFound =  await Itinerary.find({city: id})
+            
+            if(!itinerariesFound.length == 0){
+              return  res.status(404).json(
+                  {
+                      "message": "itinerary not found",
+                      
+                  })
+                  
             }
-      )
+        } 
+         return res.status(200).json(
+              {
+                  "message": "itinerary found",
+                  "Itinerary": itinerariesFound
+              })
+      
    
    } catch (error) {
             res.status(500).json({message: error.message})
@@ -114,7 +125,7 @@ const updateItinerary = async (req, res) =>{
         }
 
         let {id}= req.params /* using params to find the object to update */
-       let itineraryToUpdate =  await itinerary.findByIdAndUpdate({_id: id}, updateData)
+       let itineraryToUpdate =  await Itinerary.findByIdAndUpdate({_id: id}, updateData)
     
       res.status(200).json(
             {
@@ -134,7 +145,7 @@ const deleteItinerary = async (req, res) =>{
     try {
         
          let {id}= req.query
-        let itineraryToDelete =  await itinerary.deleteOne({_id: id})
+        let itineraryToDelete =  await Itinerary.deleteOne({_id: id})
      
        res.status(200).json(
              {
@@ -148,14 +159,6 @@ const deleteItinerary = async (req, res) =>{
     }
     
  }
-
-
-
-
-
-
-
-
 
 
 

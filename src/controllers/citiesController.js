@@ -1,4 +1,4 @@
-const city =require("../models/city.js")
+const City =require("../models/city.js")
 
 /* Add city controller */
 const addCity = async (req, res ) =>{
@@ -8,7 +8,7 @@ const addCity = async (req, res ) =>{
         
         //console.log(cityInfo)
 
-        const cityAdded = await city.create(cityInfo)
+        const cityAdded = await City.create(cityInfo)
         
         res.Status(200).json({
             message: "added city to Mytinerary",
@@ -31,7 +31,7 @@ const getCities = async (req, res) =>{
         query.name = {$regex: valueselect, $options:'i'  }
     }
    try {
-       let cities =  await city.find(query)
+       let cities =  await City.find(query).populate("_itineraries")
     
       res.status(200).json(
        cities
@@ -48,7 +48,7 @@ const getCity = async (req, res) =>{
    try {
 
         let {id}= req.params
-       let cityFound =  await city.findById(id)
+       let cityFound =  await City.findById(id).populate("_itineraries")
     
       res.status(200).json(
             {
@@ -68,7 +68,7 @@ const deleteCity = async (req, res) =>{
    try {
        
         let {id}= req.query
-       let cityToDelete =  await city.deleteOne({_id: id})
+       let cityToDelete =  await City.deleteOne({_id: id})
     
       res.status(200).json(
             {
@@ -94,7 +94,7 @@ const updateCity = async (req, res) =>{
         }
 
         let {id}= req.params /* using params to find the object to update */
-       let cityToUpdate =  await city.findByIdAndUpdate({_id: id}, updateData)
+       let cityToUpdate =  await City.findByIdAndUpdate({_id: id}, updateData)
     
       res.status(200).json(
             {

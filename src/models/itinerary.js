@@ -23,9 +23,9 @@ const schemaItinerary= new Schema({
             type: String,
             required: true,
         },
-         city: {
+         _city: {
             type: Types.ObjectId,
-            Ref: "city"
+            ref: 'city'
             
         },
          likes: {
@@ -47,7 +47,7 @@ const schemaItinerary= new Schema({
 })
 /*   create a model based on the schema defined before. needs 2 params: used schema and name*/
 
-const itinerary = model("itinerary", schemaItinerary)
+const Itinerary = model("itinerary", schemaItinerary)
 
 /* exports the model itinerary */
-module.exports = itinerary
+module.exports = Itinerary
