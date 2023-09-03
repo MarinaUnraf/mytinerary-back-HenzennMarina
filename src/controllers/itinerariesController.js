@@ -80,20 +80,20 @@ const getItinerary = async (req, res) =>{
 const getItinerariesByCity = async (req, res) =>{
    try {
 
-        let {id}= req.query
-        const cityFound = await City.findById(id)
-        if(cityFound){
+        let {id}= req.params
+     
+        
             
-            let itinerariesFound =  await Itinerary.find({city: id})
+            let itinerariesFound =  await Itinerary.find({_city:id})
             
-            if(!itinerariesFound.length == 0){
+            if(itinerariesFound.length == 0){
               return  res.status(404).json(
                   {
                       "message": "itinerary not found",
                       
                   })
                   
-            }
+        
         } 
          return res.status(200).json(
               {
