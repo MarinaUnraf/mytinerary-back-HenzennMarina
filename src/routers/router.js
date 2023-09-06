@@ -3,6 +3,7 @@ const express = require('express') /* imports express into the router module */
 const {addCity, getCities, getCity, updateCity, deleteCity} = require('../controllers/citiesController.js')
 const { addCollection } = require('../controllers/collectionController.js')
 const { getItinerary, addItinerary, updateItinerary, getItineraries, deleteItinerary,getItinerariesByCity } = require('../controllers/itinerariesController.js')
+const authRouter = require('./Auth.js')
 const router = express.Router()/*  calls the router method from express and saves it in the router const */
 
 
@@ -27,8 +28,9 @@ router.put("/itinerary/:id", updateItinerary)
 router.delete("/itinerary", deleteItinerary)
 
 
+/* auth router */
 
-
+router.use("/user",authRouter)
 
 
 module.exports = router /* exports the module to use it in another file  by exmaple in app.js */

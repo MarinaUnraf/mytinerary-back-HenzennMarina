@@ -29,12 +29,7 @@ const schemaUser = new Schema({
         googleLog: {
             type: Boolean,
             default: false,
-        },
-          _itineraries: [{
-            type: Types.ObjectId,
-            ref:'itinerary' 
-            
-        }]
+        }
 })
 /*   create a model based on the schema defined before. needs 2 params: used schema and name*/
 
