@@ -1,5 +1,6 @@
 const User = require('../models/user.js')
 
+/* sign Up controller */
 const registerUser = async (req, res)=>{
 
      const userPayload = req.body 
@@ -29,6 +30,7 @@ const registerUser = async (req, res)=>{
         }
 
 }
+/* login controller */
 const userLogin =  async (req, res )=>{
 
     try {
@@ -48,7 +50,26 @@ const userLogin =  async (req, res )=>{
         res.status(400).json({message: error.message})
     }
 }
+/* login with jwt and passport controller */
+const authenticated = async (req, res)=>{
+     try {
+        res.status(200).json({
+            message: "Succesfully authenticated",
+            token: req.token,
+            user: {
+                email: req.user.email,
+                id: req.user._id,
+                urlimage: req.user.urlimage,
+                firstName: req.user.firstName
+
+            }
+        })
+
+    } catch (error) {
+        res.status(400).json({message: error.message})
+    }
+}
 
 
 
-module.exports= {registerUser, userLogin}
+module.exports= {registerUser, userLogin, authenticated}

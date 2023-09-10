@@ -29,7 +29,7 @@ const userSchema = joi.object({
     .min(8)
     .trim()
     .pattern(new RegExp('^[a-zA-Z0-9]'))
-   
+    
     .messages({
         'string.empty' : 'Pasword is mandatory',
         'string.min': 'The password must have more than three characters',

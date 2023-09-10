@@ -1,6 +1,11 @@
+
 const bcrypt = require("bcrypt");
 const User = require("../models/user.js"); /* user schema to validate */
 const jwt = require("jsonwebtoken");
+const passport = require('passport');
+const {Strategy, ExtractJwt}= require('passport-jwt');
+
+
 
 
 
@@ -52,10 +57,11 @@ const verifyUserExists = async (req, res, next) => {
 /* middleware that generates JWT token */
 const generateToken = (req, res, next) => {
   try {
-      let secretKey = process.env.SECRET_KEY; /* using enviorement variables for security */
+       /* using enviorement variables for security */
+       let secretKey = process.env.SECRET_KEY;
 
       /* library that generates the token. Takes 3 args 2 mandatory: body of the token and secrete key, lastly when the token expires */
-      let token = jwt.sign({ email: req.body.email }, secretKey, { expiresIn: '5m' });
+      let token = jwt.sign({ email: req.user.email }, secretKey, { expiresIn: '5m' });
 
       req.token = token; /* saves the generated token on the property  */
       next();
@@ -65,4 +71,32 @@ const generateToken = (req, res, next) => {
   }
 };
 
-module.exports = { hashPassword, verifyPassword, verifyUserExists,generateToken };
+/* middleware to login with jwt using passport */
+
+
+
+const passportVerificator = passport.use(
+
+  new Strategy({
+    jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
+    secretOrKey:"MhBack2732",
+  }, async(payload, done) =>{
+        try {
+          
+          let userFounded = await User.findOne({email: payload.email})
+
+          if (userFounded){
+            return done(null, userFounded);
+
+          }else{
+            return done(null)
+          }
+
+        } catch (error) {
+            return done (error)
+        }
+          
+  })
+)
+
+module.exports = { hashPassword, verifyPassword, verifyUserExists,generateToken, passportVerificator };
