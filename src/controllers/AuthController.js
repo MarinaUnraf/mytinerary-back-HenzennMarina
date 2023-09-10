@@ -1,4 +1,3 @@
-const { verifyPassword } = require('../middlewares/auth.js')
 const User = require('../models/user.js')
 
 const registerUser = async (req, res)=>{
@@ -33,22 +32,17 @@ const registerUser = async (req, res)=>{
 const userLogin =  async (req, res )=>{
 
     try {
-       const {email, password} = req.body
-       const userFounded = await User.findOne({email: email})
+        res.status(200).json({
+            message: "Succesfully logged in",
+            token: req.token,
+            user: {
+                email: req.user.email,
+                id: req.user._id,
+                urlimage: req.user.urlimage,
+                firstName: req.user.firstName
 
-       if(userFounded){
-            if(verifyPassword(password, userFounded.password)){
-               return res.status(200).json({message: "Logged succesfully", user: userFounded })
-                
-            }else{
-               return res.status(400).json({message: "Wrong password, please try again"})
             }
-
-
-
-       }else{
-            res.status(400).json({message: "User not found"})
-       }
+        })
 
     } catch (error) {
         res.status(400).json({message: error.message})
