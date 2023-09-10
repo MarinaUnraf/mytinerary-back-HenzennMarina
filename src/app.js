@@ -3,7 +3,7 @@ const cors = require("cors")
  
 const router = require("./routers/router.js") /* imports the router module to be used by app */
 
-require('dotenv').config() 
+require("dotenv").config() 
 require("./config/db.js") /*  tries to connect to the database*/
 
 

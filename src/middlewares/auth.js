@@ -1,10 +1,12 @@
 
+require("dotenv").config() 
 const bcrypt = require("bcrypt");
 const User = require("../models/user.js"); /* user schema to validate */
 const jwt = require("jsonwebtoken");
 const passport = require('passport');
 const {Strategy, ExtractJwt}= require('passport-jwt');
 
+const secretKey =process.env.SECRET_KEY
 
 
 
@@ -57,8 +59,8 @@ const verifyUserExists = async (req, res, next) => {
 /* middleware that generates JWT token */
 const generateToken = (req, res, next) => {
   try {
-       /* using enviorement variables for security */
-       let secretKey = process.env.SECRET_KEY;
+       /*  couldnt use enviorement variables for security */
+   
 
       /* library that generates the token. Takes 3 args 2 mandatory: body of the token and secrete key, lastly when the token expires */
       let token = jwt.sign({ email: req.user.email }, secretKey, { expiresIn: '5m' });
@@ -79,7 +81,7 @@ const passportVerificator = passport.use(
 
   new Strategy({
     jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
-    secretOrKey:"MhBack2732",
+    secretOrKey:secretKey,
   }, async(payload, done) =>{
         try {
           

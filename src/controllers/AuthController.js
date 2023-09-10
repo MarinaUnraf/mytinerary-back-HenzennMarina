@@ -59,8 +59,7 @@ const authenticated = async (req, res)=>{
             user: {
                 email: req.user.email,
                 id: req.user._id,
-                urlimage: req.user.urlimage,
-                firstName: req.user.firstName
+               
 
             }
         })
@@ -70,6 +69,16 @@ const authenticated = async (req, res)=>{
     }
 }
 
+const userLogout = async (req, res)=>{
+
+    try {
+            res.status(200).json({message: 'logged out', token: req.token})
+        
+    } catch (error) {
+        res.status(500).json({message: error.message})
+    }
+
+}
 
 
-module.exports= {registerUser, userLogin, authenticated}
+module.exports= {registerUser, userLogin, authenticated, userLogout}
